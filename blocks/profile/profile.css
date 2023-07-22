@@ -1,0 +1,12 @@
+.profile {
+  display: flex;
+  flex-direction: row;
+  position: relative;
+}
+
+@media screen and (max-width : 600px) {
+  .profile{
+    display: flex;
+    flex-direction: column;
+  }
+}

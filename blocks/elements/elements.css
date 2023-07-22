@@ -1,0 +1,26 @@
+.elements{
+  padding-top: 42px;
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-gap: 16px;
+  justify-content: center;
+}
+
+@media screen and (max-width : 1100px) {
+  .elements{
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: center;
+  }
+  
+}
+
+@media screen and (max-width : 600px) {
+  .elements{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+}

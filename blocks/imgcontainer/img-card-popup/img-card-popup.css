@@ -1,0 +1,15 @@
+#img-card-popup{
+  border-radius: 20px;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  bottom: 20px;
+}
+
+@media screen and (max-width : 560px) {
+  #img-card-popup{
+    border-radius: 20px;
+    height: 322px;
+  }
+  
+}
