@@ -1,6 +1,20 @@
-.like {
+.like, .like_dark {
   position: absolute;
   top: 30px;
   right: 20px;
   cursor: pointer;
 }
+
+.like_dark{
+  display: none;
+}
+
+.hide{
+  display: none;
+}
+
+.show{
+  display: block;
+}
+
+

@@ -9,7 +9,8 @@ const popUpProfile = document.querySelector('.popup_profile');
 const popUpFormImages = document.querySelector ('.popup_images')
 let nameInput = document.querySelector('.popup__container_input_name');
 let jobInput = document.querySelector('.popup__container_input_info');
-
+const likeIcon = document.querySelectorAll('.like');
+const darkMode = document.querySelectorAll('.like_dark');
 
 
 editButton.addEventListener('click', openPopUpProfile);
@@ -17,6 +18,31 @@ btnClosed.addEventListener('click', closePopUpProfile);
 addButton.addEventListener('click', openPopUpFormImages);
 btnClosedImages.addEventListener('click', closePopUpFormImages);
 saveButton.addEventListener('click', handlerProfileFormSubmit);
+
+
+likeIcon.forEach(heart => {
+  heart.addEventListener('click', (evt) => {
+    const element = evt.target;
+    const elementDark = element.nextElementSibling;
+    element.classList.add('hide');
+    element.classList.remove('hide')
+    elementDark.classList.add('show');
+    elementDark.classList.remove('hide');
+  })
+})
+
+darkMode.forEach(darkHeart => {
+  darkHeart.addEventListener('click', (evt) => {
+    console.log('click a los botones negros')
+    const elementDark = evt.target;
+    const element = elementDark.previousElementSibling;
+    element.classList.remove('hide')
+    element.classList.add('show');
+    elementDark.classList.add('hide');
+    elementDark.classList.remove('show')
+  })
+})
+
 
 
 function openPopUpProfile() {
@@ -76,3 +102,4 @@ function closePopUpPreviewImagesModal(){
   const popUpPreview = document.querySelector('.popup_preview_images');  // Can be reused si lo defines arriba
   popUpPreview.classList.remove ('popup_opened');
 }
+
