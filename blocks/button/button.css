@@ -1,0 +1,17 @@
+.button{
+  display: flex;
+  gap: 180px;
+}
+
+
+@media screen and (max-width : 975px) {
+  .button{
+    gap: 60px;
+  }
+}
+
+@media screen and (max-width : 670px) {
+  .button{
+    gap: 0px;
+  }
+}

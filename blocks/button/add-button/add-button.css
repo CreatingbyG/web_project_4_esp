@@ -1,0 +1,10 @@
+.add-button {
+  background-repeat: no-repeat;
+  background-image: url("/images/add_button.png");
+  width: 150px;
+  height: 50px;
+  background-color: #000;
+  margin: 30px auto;
+  border: 2px;
+  cursor: pointer;
+}

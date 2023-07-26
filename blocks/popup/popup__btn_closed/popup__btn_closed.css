@@ -1,0 +1,18 @@
+.popup__btn_closed{
+  cursor: pointer;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  left: 420px;
+  bottom: 220px;
+  background-color: #00000000;
+  border: none;
+}
+
+@media screen and (max-width : 560px) {
+  .popup__btn_closed{
+    left: 230px;
+    bottom: 250px;
+  }
+  
+}
