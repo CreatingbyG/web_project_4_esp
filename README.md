@@ -1,16 +1,20 @@
-# Proyecto 5: Alrededor de los Estados Unidos
+# Alrededor de los Estados Unidos
 
 ### Descripción general
 
-* Figma
-* Imágenes
+- Ciudades / Galerias / Cartas / Perfiles
+- Botones con la opción de anadir tu nombre y "hobby" o trabajo (dedicación).
 
-**Figma**
+## _¿QUE ENCONTRARAS EN ALREDEDOR DE LOS ESTADOS UNIDOS?_
 
-* [Enlace al proyecto en Figma](https://www.figma.com/file/LDMgqWesKpQkIwhOfEBuTS/WEB%2C-Sprint-5%3A-Around-The-U.S.-%7C-desktop-%2B-mobile?node-id=0%3A1)
+Este es un proyecto que muestra las ciudades alrededor de una exploración de los Estados Unidos. Consta de 6 lugares, cada lugar tiene un icono de "me gusta" (si así deseas darle "like"), puedes ampliar la imagen del lugar con solo darle "click" a la misma, también podrás modificar el nombre predeterminado del perfil superior y el "hobby" o dedicación. Espero te sientas como un explorador o como un entusiasta. 
 
-**Imágenes**
+## _CONSTRUIDO CON:_
 
-A la hora de trabajar, debes optar por exportar las imágenes directamente desde Figma; te recomendamos hacerlo para practicar más. No olvides optimizarlas [aquí](https://tinypng.com/), para que tu proyecto cargue más rápido. 
+- HTML5
+- CSS5
+- JAVASCRIPT
 
-¡Esperamos que te diviertas con JavaScript!
+## _¿COMO DESPLEGAR LA PAGINA WEB?_
+
+Para el despliegue de la pagina, debes tener un navegador (o navegadores) instalados en tu dispositivo local, posterior a ello, descargar el archivo ZIP de mi repositorio y una vez almacenado en tu carpeta local, podras abrirlo con el navegador de tu preferencia. O simplemente visitar estos "links": 
