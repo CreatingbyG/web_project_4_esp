@@ -17,4 +17,4 @@ Este es un proyecto que muestra las ciudades alrededor de una exploración de lo
 
 ## _¿COMO DESPLEGAR LA PAGINA WEB?_
 
-Para el despliegue de la pagina, debes tener un navegador (o navegadores) instalados en tu dispositivo local, posterior a ello, descargar el archivo ZIP de mi repositorio y una vez almacenado en tu carpeta local, podras abrirlo con el navegador de tu preferencia. O simplemente visitar estos "links": 
+Para el despliegue de la pagina, debes tener un navegador (o navegadores) instalados en tu dispositivo local, posterior a ello, descargar el archivo ZIP de mi repositorio y una vez almacenado en tu carpeta local, podras abrirlo con el navegador de tu preferencia. O simplemente visitar este "link": https://creatingbyg.github.io/web_project_4_esp/.
