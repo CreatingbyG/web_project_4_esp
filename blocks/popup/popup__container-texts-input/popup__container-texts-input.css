@@ -1,4 +1,4 @@
-.popup__container_input{
+.popup__container-texts-input, .popup__container-texts-input-name, .popup__container-texts-input-info{
   border: none;
   border-bottom: 1px solid;
   font-family: "Inter", Arial, sans-serif;
@@ -6,8 +6,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
   height: 20px;
+  margin-top: 50px;
 }

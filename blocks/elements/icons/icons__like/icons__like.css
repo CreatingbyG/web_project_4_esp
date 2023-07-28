@@ -1,11 +1,11 @@
-.like, .like_dark {
+.icons__like, .icons__like_like-dark {
   position: absolute;
   top: 30px;
   right: 20px;
   cursor: pointer;
 }
 
-.like_dark{
+.icons__like_like-dark{
   display: none;
 }
 
