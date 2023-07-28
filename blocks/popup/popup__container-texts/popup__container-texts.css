@@ -1,6 +1,6 @@
-.popup__container_texts{
+.popup__container-texts{
   display: flex;
-  gap: 40px;
   flex-direction: column;
   border: none;
+  margin: 0px 20px;
 }

@@ -1,16 +1,16 @@
 const editButton = document.querySelector('.edit-button');
-const btnClosed = document.querySelector('.popup__btn_closed');
+const btnClosed = document.querySelector('.popup__container-btn-closed');
 const addButton = document.querySelector('.add-button');
-const btnClosedImages = document.querySelector('.popup__btn_closed')
+const btnClosedImages = document.querySelector('.popup__container-btn-closed-image')
 const titulo = document.querySelector('.profile__description-name');
 const subtitle = document.querySelector('.profile__description-info');
-const saveButton = document.querySelector('.save__button');
+const saveButton = document.querySelector('.popup__handlers-button');
 const popUpProfile = document.querySelector('.popup_profile');
 const popUpFormImages = document.querySelector ('.popup_images')
-let nameInput = document.querySelector('.popup__container_input_name');
-let jobInput = document.querySelector('.popup__container_input_info');
-const likeIcon = document.querySelectorAll('.like');
-const darkMode = document.querySelectorAll('.like_dark');
+let nameInput = document.querySelector('.popup__container-texts-input-name');
+let jobInput = document.querySelector('.popup__container-texts-input-info');
+const likeIcon = document.querySelectorAll('.icons__like');
+const darkMode = document.querySelectorAll('.icons__like_like-dark');
 
 
 editButton.addEventListener('click', openPopUpProfile);
@@ -33,7 +33,6 @@ likeIcon.forEach(heart => {
 
 darkMode.forEach(darkHeart => {
   darkHeart.addEventListener('click', (evt) => {
-    console.log('click a los botones negros')
     const elementDark = evt.target;
     const element = elementDark.previousElementSibling;
     element.classList.remove('hide')
@@ -51,7 +50,8 @@ function openPopUpProfile() {
   jobInput.value = subtitle.textContent;
 }
 
-function closePopUpProfile() {
+function closePopUpProfile(evt) {
+  evt.preventDefault();
   popUpProfile.classList.remove('popup_opened');
 }
 
@@ -59,12 +59,13 @@ function openPopUpFormImages(){
   popUpFormImages.classList.add('popup_opened');
 }
 
-function closePopUpFormImages() {
+function closePopUpFormImages(evt) {
+  evt.preventDefault();
   popUpFormImages.classList.remove ('popup_opened');
 }
 
-function handlerProfileFormSubmit(e){
-  e.preventDefault();
+function handlerProfileFormSubmit(evt){
+  evt.preventDefault();
   titulo.textContent = nameInput.value;
   subtitle.textContent = jobInput.value;
   popUpProfile.classList.remove('popup_opened');
@@ -79,27 +80,26 @@ function handlerProfileFormSubmit(e){
 
 // SHOW CARD IMAGE UPON CLICKING ON CARD
 function openPopUpImages(numberCard){
-  console.log("Abriendo numero de card " + numberCard)
   if (numberCard == null){
-    numberCard = 1; // Sino hay nada por parametros, muestra la imagen uno
+    numberCard = 1;
   }
 
   // 1. TO BUILD ROUTE IMAGE
   var routeImage = "images/image-card-{numeroImagen}.jpg";
   routeImage = routeImage.replace("{numeroImagen}", numberCard);
-  console.log("RUTA CONSTRUIDA: " + routeImage)
 
   // 2. OPEN POP UP
-  const popUpFormImages = document.querySelector('.popup_preview_images');  // Can be reused si lo defines arriba
+  const popUpFormImages = document.querySelector('.popup_preview_images');
   popUpFormImages.classList.add('popup_opened');
 
-  // 3. HERE WE CHANGE THE POP UP IMAGE SRC
+  // 3. HERE WE CHANGE THE POP UP IMAGE SRC 
   const imagePopUp = document.getElementById('img-card-popup');
-  imagePopUp.src = routeImage;
+  imagePopUp.setAttribute('src', routeImage);
+  imagePopUp.setAttribute('alt', 'Imagen de la ciudad')
 }
 
 function closePopUpPreviewImagesModal(){
-  const popUpPreview = document.querySelector('.popup_preview_images');  // Can be reused si lo defines arriba
+  const popUpPreview = document.querySelector('.popup_preview_images');
   popUpPreview.classList.remove ('popup_opened');
 }
 
