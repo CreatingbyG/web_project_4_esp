@@ -1,4 +1,4 @@
-.popup__container-texts-input, .popup__container-texts-input-name, .popup__container-texts-input-info{
+.popup__container-texts-input, .popup__container-texts-input-name, .popup__container-texts-input-info, .popup__container-texts-input-title, .popup__container-texts-input-link{
   border: none;
   border-bottom: 1px solid;
   font-family: "Inter", Arial, sans-serif;

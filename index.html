@@ -27,73 +27,20 @@
         <button class="edit-button"></button>
         <button class="add-button"></button>
       </section>
-
-      <!-- ELEMENTS -->
-      <section class="elements">
-        <!-- CARD NUMBER 1 -->
-        <!-- Example of using background-image embedded in the HTML -->
-        <div class="card">
-          <img class="card-photo" src="./images/image-card-1.jpg" alt="Valle de Yosemite">
-            <div class="icons">
-              <img class="icons__delete" src="./images/Trash.svg" alt="icono para eliminar imagen o modificar">
-              <img class="icons__like" src="./images/Group.svg" alt="icono para darle me gusta a la foto">
-              <img class="icons__like icons__like_like-dark" src="./images/Union.svg" alt="icono para darle me gusta a la foto">
-            </div>
-          <p class="card__image-text"><strong>Valle de Yosemite</strong></p>
-        </div>
-
-        <!-- CARD NUMBER 2 -->
-        <div class="card">
-          <img class="card-photo" src="./images/image-card-2.jpg" alt="Lago Louise">
-          <div class="icons">
-            <img class="icons__delete" src="./images/Trash.svg" alt="icono para eliminar imagen o modificar">
-            <img class="icons__like" src="./images/Group.svg" alt="icono para darle me gusta a la foto">
-            <img class="icons__like icons__like_like-dark" src="./images/Union.svg" alt="icono para darle me gusta a la foto">
+      <section class="elements"></section>
+      <template id="template-cards">
+        <section class="elements">
+          <div class="card">
+            <img class="card-photo" src="./images/image-card-1.jpg" alt="Valle de Yosemite">
+              <div class="icons">
+                <img class="icons__delete" src="./images/Trash.svg" alt="icono para eliminar imagen o modificar">
+                <img class="icons__like" src="./images/Group.svg" alt="icono para darle me gusta a la foto">
+                <img class="icons__like icons__like_like-dark" src="./images/Union.svg" alt="icono para darle me gusta a la foto">
+              </div>
+            <p class="card__image-text"><strong>Valle de Yosemite</strong></p>
           </div>
-          <p class="card__image-text"><strong>Lago Louise</strong></p>
-        </div>
-
-        <!-- CARD NUMBER 3 -->
-        <div class="card">
-          <img class="card-photo" src="./images/image-card-3.jpg" alt="Montañas Calvas">
-          <div class="icons">
-            <img class="icons__delete" src="./images/Trash.svg" alt="icono para eliminar imagen o modificar">
-            <img class="icons__like" src="./images/Group.svg" alt="icono para darle me gusta a la foto">
-            <img class="icons__like icons__like_like-dark" src="./images/Union.svg" alt="icono para darle me gusta a la foto">
-          </div>
-          <p class="card__image-text"><strong>Montañas Calvas</strong></p>
-        </div>
-    
-        <div class="card">
-          <img class="card-photo" src="./images/image-card-4.jpg" alt="Gran Cañon">
-          <div class="icons">
-            <img class="icons__delete" src="./images/Trash.svg" alt="icono para eliminar imagen o modificar">
-            <img class="icons__like" src="./images/Group.svg" alt="icono para darle me gusta a la foto">
-            <img class="icons__like icons__like_like-dark" src="./images/Union.svg" alt="icono para darle me gusta a la foto">
-          </div>
-          <p class="card__image-text"><strong>Gran Cañon</strong></p>
-        </div>
-
-        <div class="card">
-          <img class="card-photo" src="./images/image-card-5.jpg" alt="Yellowstone">
-             <div class="icons">
-              <img class="icons__delete" src="./images/Trash.svg" alt="icono para eliminar imagen o modificar">
-              <img class="icons__like" src="./images/Group.svg" alt="icono para darle me gusta a la foto">
-              <img class="icons__like icons__like_like-dark" src="./images/Union.svg" alt="icono para darle me gusta a la foto">
-            </div>
-          <p class="card__image-text"><strong>Yellowstone</strong></p>
-        </div>
-
-        <div class="card">
-          <img class="card-photo" src="./images/image-card-6.jpg" alt="Monte Denali">
-            <div class="icons">
-              <img class="icons__delete" src="./images/Trash.svg" alt="icono para eliminar imagen o modificar">
-              <img class="icons__like" src="./images/Group.svg" alt="icono para darle me gusta a la foto">
-              <img class="icons__like icons__like_like-dark" src="./images/Union.svg" alt="icono para darle me gusta a la foto">
-            </div>
-          <p class="card__image-text"><strong>Monte Denali</strong></p>
-        </div>
-      </section>
+        </section>
+      </template>
       <!-- EDIT PROFILE MODAL -->
       <div class="popup popup_profile">
         <form class="popup__container">
@@ -115,14 +62,14 @@
         <form class="popup__container">
           <fieldset class="popup__container-texts">
             <h4 class="popup__container-title">Nuevo lugar</h4>
-            <input type="text" class="popup__container-texts-input" placeholder="Titulo">
-            <input type="text" class="popup__container-texts-input" placeholder="Enlace a la imagen">
+            <input type="text" class="popup__container-texts-input-title" placeholder="Titulo">
+            <input type="text" class="popup__container-texts-input-link" placeholder="Enlace a la imagen">
             <button class="popup__container-btn-closed popup__container-btn-closed-image">
               <img src="./images/close_button.svg" alt="boton de cerrar">
             </button>
           </fieldset>
           <fieldset class="popup__handlers">
-            <button type="submit" class="popup__handlers-button">Crear</button>
+            <button type="submit" class="popup__handlers-button popup__handlers-button-create">Crear</button>
           </fieldset>
         </form>
       </div>
@@ -145,5 +92,6 @@
     </footer>
   </div>
   <script src="scripts.js"></script>
+  <script src="db-cards.js"></script>
 </body>
 </html>
