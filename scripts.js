@@ -14,6 +14,12 @@ let jobInput = document.querySelector(".popup__container-texts-input-info");
 const btnClosedCard = document.querySelector(
   ".popup__container-btn-closed_images"
 );
+const titleValue = document.querySelector(
+  ".popup__container-texts-input-title"
+);
+const imageValue = document.querySelector(
+  ".popup__container-texts-input-link"
+);
 const element = document.querySelector(".elements");
 
 editButton.addEventListener("click", openPopUpProfile);
@@ -33,6 +39,7 @@ element.addEventListener("click", (evt) => {
       init();
   }
 });
+
 
 function init() {
   const card = initialCards.forEach((card) => {
@@ -87,21 +94,19 @@ const btnCreateNewCard = document.querySelector(
 );
 btnCreateNewCard.addEventListener("click", (evt) => {
   evt.preventDefault();
-  const titleValue = document.querySelector(
-    ".popup__container-texts-input-title"
-  ).value;
-  const imageValue = document.querySelector(
-    ".popup__container-texts-input-link"
-  ).value;
   const newCard = {
-    name: titleValue,
-    link: imageValue,
+    name: titleValue.value,
+    link: imageValue.value,
   };
   initialCards.unshift(newCard);
+  titleValue.value = "";
+  imageValue.value = "";
   cleanHtml();
   init();
   popUpFormImages.classList.remove("popup_opened");
+  console.log(titleValue);
 });
+
 function cleanHtml() {
   while (element.firstChild) {
     element.removeChild(element.firstChild);
@@ -119,9 +124,9 @@ function closePopUpProfile(evt) {
   popUpProfile.classList.remove("popup_opened");
 }
 
-function openPopUpFormImages() {
+function openPopUpFormImages(evt) {
+  evt.preventDefault();
   popUpFormImages.classList.add("popup_opened");
-  
 }
 
 function closePopUpFormImages(evt) {
