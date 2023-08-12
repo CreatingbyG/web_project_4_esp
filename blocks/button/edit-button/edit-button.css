@@ -9,7 +9,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width : 640px) {
+@media screen and (max-width: 640px) {
   .edit-button{
     margin: 0px;
     grid-row: 2;

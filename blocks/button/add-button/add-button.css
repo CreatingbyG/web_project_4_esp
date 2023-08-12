@@ -10,7 +10,7 @@
   cursor: pointer;
 }
 
-@media screen and (max-width : 640px) {
+@media screen and (max-width: 640px) {
   .add-button{
     margin: 20px;
     grid-row: 4;

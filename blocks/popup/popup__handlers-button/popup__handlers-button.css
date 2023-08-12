@@ -15,7 +15,7 @@
   transition: 1s ease-in-out forwards;
 }
 
-@media screen and (max-width : 640px) {
+@media screen and (max-width: 640px) {
   .popup__handlers-button{
     font-size: 14px;
   }
