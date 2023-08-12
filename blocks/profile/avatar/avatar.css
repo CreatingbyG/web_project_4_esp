@@ -4,7 +4,7 @@
   height: 120px;
 }
 
-@media screen and (max-width : 640px) {
+@media screen and (max-width: 640px) {
   .avatar{
     margin: 0 auto;
   }

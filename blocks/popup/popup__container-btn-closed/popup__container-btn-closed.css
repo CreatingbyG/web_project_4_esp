@@ -9,7 +9,7 @@
   border: none;
 }
 
-@media screen and (max-width : 640px) {
+@media screen and (max-width: 640px) {
   .popup__container-btn-closed{
     left: 210px;
     bottom: 240px;
