@@ -9,7 +9,7 @@
 @media screen and (max-width: 640px) {
   #img-card-popup{
     border-radius: 20px;
-    height: 100%;
+    height: 50vh;
   }
   
 }
