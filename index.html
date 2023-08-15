@@ -44,7 +44,7 @@
       <!-- EDIT PROFILE MODAL -->
       <div class="popup popup_profile">
         <form class="popup__container">
-          <fieldset class="popup__container-texts">
+          <fieldset class="popup__container-texts" >
             <h4 class="popup__container-title">Editar perfil</h4>
             <input type="text" class="popup__container-texts-input-name" placeholder="Nombre">
             <input type="text" class="popup__container-texts-input-info" placeholder="Acerca de mi">
@@ -60,7 +60,7 @@
       <!-- EDIT IMAGES MODAL -->
       <div class="popup popup_images">
         <form class="popup__container">
-          <fieldset class="popup__container-texts">
+          <fieldset class="popup__container-texts"></fieldset>
             <h4 class="popup__container-title">Nuevo lugar</h4>
             <input type="text" class="popup__container-texts-input-title" placeholder="Titulo">
             <input type="text" class="popup__container-texts-input-link" placeholder="Enlace a la imagen">
@@ -82,6 +82,7 @@
           <div class="popup__container-img">
             <img id="img-card-popup">
           </div>
+          <h3 class="img-card-name"></h3>
         </div>
       </div>
     </main>
@@ -91,7 +92,6 @@
       </p>
     </footer>
   </div>
-  <script src="scripts.js"></script>
-  <script src="db-cards.js"></script>
+  <script type="module" src="./index.js"></script>
 </body>
 </html>
