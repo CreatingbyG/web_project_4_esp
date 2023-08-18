@@ -1,4 +1,4 @@
-.elements{
+.contelements{
   padding-top: 42px;
   display: grid;
   grid-template-columns: auto auto auto;
@@ -7,7 +7,7 @@
 }
 
 @media screen and (max-width: 1100px) {
-  .elements{
+  .contelements{
     display: grid;
     grid-template-columns: auto auto;
     justify-content: center;
@@ -16,7 +16,7 @@
 }
 
 @media screen and (max-width: 640px) {
-  .elements{
+  .contelements{
     display: flex;
     flex-direction: column;
     justify-content: center;
