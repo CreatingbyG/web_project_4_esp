@@ -1,4 +1,7 @@
 import { initialCards } from "./db-cards.js";
+import { objConfig } from "./validate.js";
+import { enableValidation } from "./validate.js";
+
 const editButton = document.querySelector(".edit-button");
 const btnClosed = document.querySelector(".popup__container-btn-closed");
 const addButton = document.querySelector(".add-button");
@@ -19,7 +22,9 @@ const titleValue = document.querySelector(
   ".popup__container-texts-input-title"
 );
 const imageValue = document.querySelector(".popup__container-texts-input-link");
+const popUps = document.querySelectorAll(".popup");
 const element = document.querySelector(".contelements");
+
 
 editButton.addEventListener("click", openPopUpProfile);
 btnClosed.addEventListener("click", closePopUpProfile);
@@ -28,6 +33,19 @@ saveButton.addEventListener("click", handlerProfileFormSubmit);
 btnClosedImages.addEventListener("click", closePopUpFormImages);
 btnClosedCard.addEventListener("click", closePopUpPreviewImagesModal);
 document.addEventListener("DOMContentLoaded", renderingCards);
+
+document.addEventListener("keydown", (evt) => {
+  if (evt.key === "Escape") {
+    closeAllPopups();
+  }
+});
+
+document.addEventListener("click", (evt) => {
+  if (evt.target.classList.contains("popup_opened")) {
+    const hiding = evt.target;
+    hiding.classList.remove("popup_opened");
+  }
+})
 
 element.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("icons__delete")) {
@@ -170,7 +188,9 @@ function openPopUpProfile() {
   popUpProfile.classList.add("popup_opened");
   nameInput.value = titulo.textContent;
   jobInput.value = subtitle.textContent;
+  enableValidation(objConfig);
 }
+
 
 function closePopUpProfile(evt) {
   evt.preventDefault();
@@ -178,8 +198,8 @@ function closePopUpProfile(evt) {
 }
 
 function openPopUpFormImages(evt) {
-  evt.preventDefault();
   popUpFormImages.classList.add("popup_opened");
+  enableValidation(objConfig);
 }
 
 function closePopUpFormImages(evt) {
@@ -198,3 +218,19 @@ function closePopUpPreviewImagesModal() {
   const popUpPreview = document.querySelector(".popup_preview_images");
   popUpPreview.classList.remove("popup_opened");
 }
+
+function closeAllPopups() {
+  popUps.forEach(popup => {
+      popup.classList.remove("popup_opened");
+  });
+}
+
+/*function deleteRefresh(){
+  const spanToDelete = document.querySelectorAll(".form__input_type_error")
+  if (spanToDelete){
+    console.log(spanToDelete);
+    spanToDelete.forEach(span => {
+      span.classList.remove("form__input_type_error");
+    })
+  }
+}*/
