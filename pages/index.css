@@ -20,6 +20,7 @@
 @import url(../blocks/elements/icons/icons__like/icons__like.css);
 @import url(../blocks/elements/card__image-text/card__image-text.css);
 @import url(../blocks/popup/popup.css);
+@import url(../blocks/popup/popupform/popupform.css);
 @import url(../blocks/popup/popup_opened/popup_opened.css);
 @import url(../blocks/popup/popup__container/popup__container.css);
 @import url(../blocks/popup/popup__container-texts/popup__container-texts.css);
