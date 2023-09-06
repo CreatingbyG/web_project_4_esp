@@ -224,13 +224,3 @@ function closeAllPopups() {
       popup.classList.remove("popup_opened");
   });
 }
-
-/*function deleteRefresh(){
-  const spanToDelete = document.querySelectorAll(".form__input_type_error")
-  if (spanToDelete){
-    console.log(spanToDelete);
-    spanToDelete.forEach(span => {
-      span.classList.remove("form__input_type_error");
-    })
-  }
-}*/
