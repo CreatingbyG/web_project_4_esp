@@ -1,6 +1,8 @@
 import { initialCards } from "./db-cards.js";
-import { objConfig } from "./validate.js";
-import { enableValidation } from "./validate.js";
+import { objConfig } from "./validate.js"; 
+import { enableValidation } from "./validate.js"; 
+import { hasInvalidInput } from "./validate.js";
+
 
 const editButton = document.querySelector(".edit-button");
 const btnClosed = document.querySelector(".popup__container-btn-closed");
@@ -33,19 +35,6 @@ saveButton.addEventListener("click", handlerProfileFormSubmit);
 btnClosedImages.addEventListener("click", closePopUpFormImages);
 btnClosedCard.addEventListener("click", closePopUpPreviewImagesModal);
 document.addEventListener("DOMContentLoaded", renderingCards);
-
-document.addEventListener("keydown", (evt) => {
-  if (evt.key === "Escape") {
-    closeAllPopups();
-  }
-});
-
-document.addEventListener("click", (evt) => {
-  if (evt.target.classList.contains("popup_opened")) {
-    const hiding = evt.target;
-    hiding.classList.remove("popup_opened");
-  }
-})
 
 element.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("icons__delete")) {
@@ -140,6 +129,8 @@ function cardPopUp(evt) {
   const imagePopUp = document.getElementById("img-card-popup");
   imagePopUp.setAttribute("src", routeImage);
   imagePopUp.setAttribute("alt", altImage);
+  document.addEventListener("keydown", escPopUpDeleting);
+  document.addEventListener("click", deletingPopUpClick);
 }
 
 const CreateNewCard = document.querySelector(".popup__handlers-button-create");
@@ -154,57 +145,81 @@ CreateNewCard.addEventListener("click", (evt) => {
   imageValue.value = "";
   renderingCards(true);
   popUpFormImages.classList.remove("popup_opened");
+  deletingEvents();
 });
 
 const formProfile = document.querySelector(".popup__container-texts");
 formProfile.addEventListener("keypress", (evt) => {
   if (evt.key === "Enter") {
     evt.preventDefault();
-    titulo.textContent = nameInput.value;
-    subtitle.textContent = jobInput.value;
-    popUpProfile.classList.remove("popup_opened");
+    if (!hasInvalidInput(Array.from(formProfile.querySelectorAll(".form__input")))) {
+      titulo.textContent = nameInput.value;
+      subtitle.textContent = jobInput.value;
+      popUpProfile.classList.remove("popup_opened");
+    }
+    deletingEvents();
   }
 });
 
-const formProfileImages = document.querySelector(
-  ".popup__container-texts-images"
-);
+const formProfileImages = document.querySelector(".popup__container-texts-images");
 formProfileImages.addEventListener("keypress", (evt) => {
   if (evt.key === "Enter") {
     evt.preventDefault();
-    const newCard = {
-      name: titleValue.value,
-      link: imageValue.value,
-    };
-    initialCards.unshift(newCard);
-    titleValue.value = "";
-    imageValue.value = "";
-    renderingCards(true)
-    popUpFormImages.classList.remove("popup_opened");
+    if (!hasInvalidInput(Array.from(formProfileImages.querySelectorAll(".form__input")))) {
+      const newCard = {
+        name: titleValue.value,
+        link: imageValue.value,
+      };
+      initialCards.unshift(newCard);
+      titleValue.value = "";
+      imageValue.value = "";
+      renderingCards(true);
+      popUpFormImages.classList.remove("popup_opened");
+    }
+    deletingEvents();
   }
 });
+
+const escPopUpDeleting = (evt) => {
+  if (evt.key === "Escape") {
+    closeAllPopups();
+  }
+};
+  
+const deletingPopUpClick = (evt) => {
+  if (evt.target.classList.contains("popup_opened")) {
+    closeAllPopups();
+    deletingEvents();
+  }
+}
 
 function openPopUpProfile() {
   popUpProfile.classList.add("popup_opened");
   nameInput.value = titulo.textContent;
   jobInput.value = subtitle.textContent;
   enableValidation(objConfig);
+  document.addEventListener("keydown", escPopUpDeleting);
+  document.addEventListener("click", deletingPopUpClick);
 }
 
 
 function closePopUpProfile(evt) {
   evt.preventDefault();
   popUpProfile.classList.remove("popup_opened");
+  deletingEvents();
 }
 
 function openPopUpFormImages(evt) {
   popUpFormImages.classList.add("popup_opened");
   enableValidation(objConfig);
+  document.addEventListener("keydown", escPopUpDeleting);
+  document.addEventListener("click", deletingPopUpClick);
 }
 
 function closePopUpFormImages(evt) {
   evt.preventDefault();
   popUpFormImages.classList.remove("popup_opened");
+  deletingEvents();
 }
 
 function handlerProfileFormSubmit(evt) {
@@ -212,15 +227,22 @@ function handlerProfileFormSubmit(evt) {
   titulo.textContent = nameInput.value;
   subtitle.textContent = jobInput.value;
   popUpProfile.classList.remove("popup_opened");
+  deletingEvents();
 }
 
 function closePopUpPreviewImagesModal() {
   const popUpPreview = document.querySelector(".popup_preview_images");
   popUpPreview.classList.remove("popup_opened");
+  deletingEvents();
 }
 
 function closeAllPopups() {
   popUps.forEach(popup => {
       popup.classList.remove("popup_opened");
   });
+}
+
+function deletingEvents(evt){
+  document.removeEventListener("keydown", escPopUpDeleting);
+  document.removeEventListener("click", deletingPopUpClick); 
 }
