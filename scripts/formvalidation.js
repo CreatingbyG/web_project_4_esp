@@ -8,7 +8,7 @@ import { closePopUpFormImages } from "./utils.js";
 import { popUpProfile } from "./utils.js";
 import { popUpFormImages } from "./utils.js";
 import { initialCards } from "./constantes.js";
-import { renderingCards } from "./card.js";
+import { renderingCards } from "./Card.js";
 import {titulo, subtitle, nameInput, jobInput, titleValue, imageValue} from "./constantes.js";
 popUps;
 
@@ -31,25 +31,24 @@ export class FormValidator {
     this._errorClass = config.errorClass;
   }
 
-  _showInputError(inputElement, errorMessage) {
+  _toggleInputError(inputElement, show) {
     const errorElement = inputElement.nextElementSibling;
-    inputElement.classList.add(this._inputErrorClass);
-    errorElement.textContent = errorMessage;
-    errorElement.classList.add(this._errorClass);
-  }
-
-  _hideInputError(inputElement) {
-    const errorElement = inputElement.nextElementSibling;
-    inputElement.classList.remove(this._inputErrorClass);
-    errorElement.classList.remove(this._errorClass);
-    errorElement.textContent = "";
+    if (show) {
+      inputElement.classList.add(this._inputErrorClass);
+      errorElement.textContent = inputElement.validationMessage;
+      errorElement.classList.add(this._errorClass);
+    } else {
+      inputElement.classList.remove(this._inputErrorClass);
+      errorElement.classList.remove(this._errorClass);
+      errorElement.textContent = "";
+    }
   }
 
   _checkInputValidity(inputElement) {
     if (!inputElement.validity.valid) {
-      this._showInputError(inputElement, inputElement.validationMessage);
+      this._toggleInputError(inputElement, true); // Show error
     } else {
-      this._hideInputError(inputElement);
+      this._toggleInputError(inputElement, false); // Hide error
     }
   }
 
@@ -61,9 +60,11 @@ export class FormValidator {
     if (this._hasInvalidInput(inputList)) {
       buttonElement.disabled = true;
       buttonElement.classList.add(this._inactiveButtonClass);
+      buttonElement.classList.add("disabled-hover");
     } else {
       buttonElement.disabled = false;
       buttonElement.classList.remove(this._inactiveButtonClass);
+      buttonElement.classList.remove("disabled-hover");
     }
   }
 
@@ -143,33 +144,39 @@ export class FormValidator {
     const formProfile = document.querySelector(".popup__container-texts");
     if (evt.key === "Enter") {
       evt.preventDefault();
-      if (!this._hasInvalidInput(Array.from(formProfile.querySelectorAll(".form__input")))) {
-      titulo.textContent = nameInput.value;
-      subtitle.textContent = jobInput.value;
-      popUpProfile.classList.remove("popup_opened");
+      const hasInvalidInput = this._hasInvalidInput(Array.from(formProfile.querySelectorAll(".form__input")));
+      if (!hasInvalidInput) {
+        titulo.textContent = nameInput.value;
+        subtitle.textContent = jobInput.value;
+        popUpProfile.classList.remove("popup_opened");
+      }
+      this._toggleInputError(nameInput, hasInvalidInput); // Show/hide error on nameInput
+      this._toggleInputError(jobInput, hasInvalidInput);  // Show/hide error on jobInput
+      deletingEvents();
     }
-    deletingEvents();
   }
-}
-
-_enterKeyDownEventImages(evt){
-  const formProfileImages = document.querySelector(".popup__container-texts-images");
-  if (evt.key === "Enter") {
-    evt.preventDefault();
-    if (!this._hasInvalidInput(Array.from(formProfileImages.querySelectorAll(".form__input")))) {
-      const newCard = {
-        name: titleValue.value,
-        link: imageValue.value,
-      };
-      initialCards.unshift(newCard);
-      titleValue.value = "";
-      imageValue.value = "";
-      renderingCards(newCard);
-      popUpFormImages.classList.remove("popup_opened");
+  
+  _enterKeyDownEventImages(evt){
+    const formProfileImages = document.querySelector(".popup__container-texts-images");
+    if (evt.key === "Enter") {
+      evt.preventDefault();
+      const hasInvalidInput = this._hasInvalidInput(Array.from(formProfileImages.querySelectorAll(".form__input")));
+      if (!hasInvalidInput) {
+        const newCard = {
+          name: titleValue.value,
+          link: imageValue.value,
+        };
+        initialCards.unshift(newCard);
+        titleValue.value = "";
+        imageValue.value = "";
+        renderingCards(newCard);
+        popUpFormImages.classList.remove("popup_opened");
+      }
+      this._toggleInputError(titleValue, hasInvalidInput); // Show/hide error on titleValue
+      this._toggleInputError(imageValue, hasInvalidInput); // Show/hide error on imageValue
+      deletingEvents();
     }
-    deletingEvents();
-  }
-};
+  };
 
 _newCardAdded(evt){
   evt.preventDefault();
