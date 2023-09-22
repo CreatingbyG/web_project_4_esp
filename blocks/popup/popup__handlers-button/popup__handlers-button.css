@@ -15,6 +15,11 @@
   transition: 1s ease-in-out forwards;
 }
 
+.disabled-hover{
+  color: #87838347;
+  opacity: 0.8;
+}
+
 .popup__button_inactive{
 border-radius: 2px;
 border: 1px solid #000;
