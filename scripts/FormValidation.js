@@ -1,16 +1,15 @@
-import { escPopUpDeleting } from "./utils.js";
-import { popUps } from "./utils.js";
-import { deletingPopUpClick } from "./utils.js";
 import { deletingEvents } from "./utils.js";
 import { closeAllPopups } from "./utils.js";
 import { closePopUpProfile } from "./utils.js";
 import { closePopUpFormImages } from "./utils.js";
 import { popUpProfile } from "./utils.js";
 import { popUpFormImages } from "./utils.js";
-import { initialCards } from "./constantes.js";
-import { renderingCards } from "./Card.js";
 import {titulo, subtitle, nameInput, jobInput, titleValue, imageValue} from "./constantes.js";
-popUps;
+import { Card } from "./Card.js";
+
+
+
+
 
 export const objConfig = {
   formSelector: ".form",
@@ -81,32 +80,20 @@ export class FormValidator {
         this._toggleButtonState(inputList, buttonElement);
       });
     });
-    const editButton = document.querySelector(".edit-button");
-    editButton.addEventListener(
-      "click",
-      this._validFormPopUpProfile.bind(this)
-    );
 
-    const addButton = document.querySelector(".add-button");
-    addButton.addEventListener("click", this._validFormPopUpImages.bind(this));
+    // const formProfile = document.querySelector(".popup__container-texts");
+    // formProfile.addEventListener("keydown", this._enterKeydownEventProfile.bind(this));
 
+    //  const formProfileImages = document.querySelector(".popup__container-texts-images");
+    //  formProfileImages.addEventListener("keydown", this._enterKeyDownEventImages.bind(this));
 
-    const formProfile = document.querySelector(".popup__container-texts");
-    formProfile.addEventListener("keydown", this._enterKeydownEventProfile.bind(this));
+    //  const btnClosed = document.querySelector(".popup__container-btn-closed");
+    //  btnClosed.addEventListener("click", closePopUpProfile);
 
-    const formProfileImages = document.querySelector(".popup__container-texts-images");
-    formProfileImages.addEventListener("keydown", this._enterKeyDownEventImages.bind(this));
-
-    const CreateNewCard = document.querySelector(".popup__handlers-button-create");
-    CreateNewCard.addEventListener("click", this._newCardAdded);
-
-    const btnClosed = document.querySelector(".popup__container-btn-closed");
-    btnClosed.addEventListener("click", closePopUpProfile);
-
-    const btnClosedImages = document.querySelector(
-      ".popup__container-btn-closed-image"
-    );
-    btnClosedImages.addEventListener("click", closePopUpFormImages);
+        //  const btnClosedImages = document.querySelector(
+        //     ".popup__container-btn-closed-image"
+        //   );
+        //   btnClosedImages.addEventListener("click", closePopUpFormImages);
 
   }
 
@@ -124,73 +111,55 @@ export class FormValidator {
     });
   }
 
-  _validFormPopUpProfile() {
-    popUpProfile.classList.add("popup_opened");
-    nameInput.value = titulo.textContent;
-    jobInput.value = subtitle.textContent;
-    formValidator.enableValidation();
-    document.addEventListener("keydown", escPopUpDeleting);
-    document.addEventListener("click", deletingPopUpClick);
-  }
-
-  _validFormPopUpImages(){
-  popUpFormImages.classList.add("popup_opened");
-  formValidator.enableValidation();
-  document.addEventListener("keydown", escPopUpDeleting);
-  document.addEventListener("click", deletingPopUpClick);
-  }
-
   _enterKeydownEventProfile(evt) {
     const formProfile = document.querySelector(".popup__container-texts");
-    if (evt.key === "Enter") {
-      evt.preventDefault();
-      const hasInvalidInput = this._hasInvalidInput(Array.from(formProfile.querySelectorAll(".form__input")));
-      if (!hasInvalidInput) {
-        titulo.textContent = nameInput.value;
-        subtitle.textContent = jobInput.value;
-        popUpProfile.classList.remove("popup_opened");
-      }
-      this._toggleInputError(nameInput, hasInvalidInput); // Show/hide error on nameInput
-      this._toggleInputError(jobInput, hasInvalidInput);  // Show/hide error on jobInput
-      deletingEvents();
-    }
-  }
+       if (evt.key === "Enter") {
+         evt.preventDefault();
+         const hasInvalidInput = this._hasInvalidInput(Array.from(formProfile.querySelectorAll(".form__input")));
+         if (!hasInvalidInput) {
+           titulo.textContent = nameInput.value;
+           subtitle.textContent = jobInput.value;
+           popUpProfile.classList.remove("popup_opened");
+         }
+         this._toggleInputError(nameInput, hasInvalidInput); // Show/hide error on nameInput
+         this._toggleInputError(jobInput, hasInvalidInput);  // Show/hide error on jobInput
+         deletingEvents();
+       }
+     }
   
-  _enterKeyDownEventImages(evt){
-    const formProfileImages = document.querySelector(".popup__container-texts-images");
-    if (evt.key === "Enter") {
-      evt.preventDefault();
-      const hasInvalidInput = this._hasInvalidInput(Array.from(formProfileImages.querySelectorAll(".form__input")));
-      if (!hasInvalidInput) {
-        const newCard = {
-          name: titleValue.value,
-          link: imageValue.value,
-        };
-        initialCards.unshift(newCard);
-        titleValue.value = "";
-        imageValue.value = "";
-        renderingCards(newCard);
-        popUpFormImages.classList.remove("popup_opened");
+     _enterKeyDownEventImages(evt) {
+      const formProfileImages = document.querySelector(".popup__container-texts-images");
+      if (evt.key === "Enter") {
+        evt.preventDefault();
+        const hasInvalidInput = this._hasInvalidInput(Array.from(formProfileImages.querySelectorAll(".form__input")));
+        if (!hasInvalidInput) {
+          const newCardData = {
+            name: titleValue.value,
+            link: imageValue.value,
+          };
+          const newCard = new Card(newCardData, "#template-cards");
+          document.querySelector(".contelements").prepend(newCard.createCard());
+          popUpFormImages.classList.remove("popup_opened");
+        }
+        this._toggleInputError(titleValue, hasInvalidInput); // Show/hide error on titleValue
+        this._toggleInputError(imageValue, hasInvalidInput); // Show/hide error on imageValue
+        deletingEvents();
       }
-      this._toggleInputError(titleValue, hasInvalidInput); // Show/hide error on titleValue
-      this._toggleInputError(imageValue, hasInvalidInput); // Show/hide error on imageValue
-      deletingEvents();
     }
-  };
 
-_newCardAdded(evt){
-  evt.preventDefault();
-  const newCard = {
-    name: titleValue.value,
-    link: imageValue.value,
-  };
-  initialCards.unshift(newCard);
-  titleValue.value = "";
-  imageValue.value = "";
-  renderingCards(newCard);
-  popUpFormImages.classList.remove("popup_opened");
-  deletingEvents();
-}
+// _newCardAdded(evt){
+//   evt.preventDefault();
+//   const newCard = {
+//     name: titleValue.value,
+//     link: imageValue.value,
+//   };
+//   initialCards.unshift(newCard);
+//   titleValue.value = "";
+//   imageValue.value = "";
+//   //this._section.addItem(newCard);
+//   popUpFormImages.classList.remove("popup_opened");
+//   deletingEvents();
+// }
 
   _handlePopupKeyDown(evt) {
     if (evt.key === "Escape") {
@@ -204,5 +173,3 @@ _newCardAdded(evt){
     }
   }
 }
-export const formValidator = new FormValidator(objConfig);
-formValidator.enableValidation();

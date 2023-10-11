@@ -46,9 +46,9 @@
         <form class="popup__container form" novalidate>
           <fieldset class="popup__container-texts">
             <h4 class="popup__container-title">Editar perfil</h4>
-            <input type="text" id="name-input" class="popup__container-texts-input-name form__input" placeholder="Nombre" minlength="2" maxlength="40" required>
+            <input type="text" id="name-input" name="name" class="popup__container-texts-input-name form__input" placeholder="Nombre" minlength="2" maxlength="40" required>
             <span class="form__input-error name-input-error"></span>
-            <input type="text" id="about-input" class="popup__container-texts-input-info form__input" placeholder="Acerca de mi" minlength="2" maxlength="200" required>
+            <input type="text" id="about-input" name="job" class="popup__container-texts-input-info form__input" placeholder="Acerca de mi" minlength="2" maxlength="200" required>
             <span class="form__input-error about-input-error"></span>
             <button type="submit" class="popup__container-btn-closed">
               <img src="./images/close_button.svg" alt="boton de cerrar">
@@ -64,9 +64,9 @@
         <form class="popup__container form" novalidate>
           <fieldset class="popup__container-texts popup__container-texts-images">
             <h4 class="popup__container-title">Nuevo lugar</h4>
-            <input type="text" id="title-input" class="popup__container-texts-input-title form__input" placeholder="Titulo" minlength="2" maxlength="30" required>
+            <input type="text" id="title-input" name="name" class="popup__container-texts-input-title form__input" placeholder="Titulo" minlength="2" maxlength="30" required>
             <span class="form__input-error title-input-error"></span>
-            <input type="url" id="url-input" class="popup__container-texts-input-link form__input" placeholder="Enlace a la imagen" required>
+            <input type="url" id="url-input" name="link" class="popup__container-texts-input-link form__input" placeholder="Enlace a la imagen" required>
             <span class="form__input-error url-input-error"></span>
             <button type="submit" class="popup__container-btn-closed popup__container-btn-closed-image">
               <img src="./images/close_button.svg" alt="boton de cerrar">
