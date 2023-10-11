@@ -40,12 +40,10 @@ export default class PopupWithForm extends Popup {
   open(){
     super.open();
     this._formValidator.enableValidation();
-    
   }
 
   close() {
     super.close();
-    //this._setEventListeners();
-    //this._form.reset();
+    this._form.reset();
   }
 }

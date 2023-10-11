@@ -1,10 +1,8 @@
-import { deletingEvents } from "./utils.js";
-import { closeAllPopups } from "./utils.js";
-import { closePopUpProfile } from "./utils.js";
-import { closePopUpFormImages } from "./utils.js";
-import { popUpProfile } from "./utils.js";
-import { popUpFormImages } from "./utils.js";
-import {titulo, subtitle, nameInput, jobInput, titleValue, imageValue} from "./constantes.js";
+import { deletingEvents } from "../utils/utils.js"
+import { closeAllPopups } from "../utils/utils.js";
+import { popUpProfile } from "../utils/utils.js";
+import { popUpFormImages } from "../utils/utils.js";
+import {titulo, subtitle, nameInput, jobInput, titleValue, imageValue} from "../utils/constantes.js";
 import { Card } from "./Card.js";
 
 
@@ -81,20 +79,6 @@ export class FormValidator {
       });
     });
 
-    // const formProfile = document.querySelector(".popup__container-texts");
-    // formProfile.addEventListener("keydown", this._enterKeydownEventProfile.bind(this));
-
-    //  const formProfileImages = document.querySelector(".popup__container-texts-images");
-    //  formProfileImages.addEventListener("keydown", this._enterKeyDownEventImages.bind(this));
-
-    //  const btnClosed = document.querySelector(".popup__container-btn-closed");
-    //  btnClosed.addEventListener("click", closePopUpProfile);
-
-        //  const btnClosedImages = document.querySelector(
-        //     ".popup__container-btn-closed-image"
-        //   );
-        //   btnClosedImages.addEventListener("click", closePopUpFormImages);
-
   }
 
   enableValidation() {
@@ -146,20 +130,6 @@ export class FormValidator {
         deletingEvents();
       }
     }
-
-// _newCardAdded(evt){
-//   evt.preventDefault();
-//   const newCard = {
-//     name: titleValue.value,
-//     link: imageValue.value,
-//   };
-//   initialCards.unshift(newCard);
-//   titleValue.value = "";
-//   imageValue.value = "";
-//   //this._section.addItem(newCard);
-//   popUpFormImages.classList.remove("popup_opened");
-//   deletingEvents();
-// }
 
   _handlePopupKeyDown(evt) {
     if (evt.key === "Escape") {

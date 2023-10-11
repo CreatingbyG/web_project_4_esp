@@ -4,8 +4,8 @@
   "description": "- Ciudades / Galerias / Cartas / Perfiles\r - Botones con la opción de anadir tu nombre y \"hobby\" o trabajo (dedicación).",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --mode production",
-    "dev": "webpack serve --mode development"
+    "build": "rm -rf dist && webpack --mode production",
+    "dev": "webpack serve --mode development && webpack serve --live-reload"
   },
   "author": "",
   "license": "ISC",

@@ -14,12 +14,12 @@
 <body>
   <div class="page">
     <header class="header">
-      <img class="logo" src="./images/logo.svg.svg" alt="logo around the US">
+      <img class="logo" src='<%=require(".././src/images/logo.svg.svg")%>' alt="logo around the US">
       <div class="line"></div>
     </header>
     <main class="content">
       <section class="profile">
-        <img class="avatar" src="./images/profile-explorer.jpg" alt="imagen del rostro del determinado perfil">
+        <img class="avatar" src='<%=require(".././src/images/profile-explorer.jpg")%>' alt="imagen del rostro del determinado perfil">
         <div class="profile__description">
           <h2 class="profile__description-name">Jacques Cousteau</h2>
           <h3 class="profile__description-info">Explorador</h3>
@@ -31,11 +31,11 @@
       <template id="template-cards">
         <section class="elements">
           <div class="card">
-            <img class="card-photo" src="./images/image-card-1.jpg" alt="Valle de Yosemite">
+            <img class="card-photo" src='<%=require(".././src/images/image-card-1.jpg")%>' alt="Valle de Yosemite">
               <div class="icons">
-                <img class="icons__delete" src="./images/Trash.svg" alt="icono para eliminar imagen o modificar">
-                <img class="icons__like" src="./images/Group.svg" alt="icono para darle me gusta a la foto">
-                <img class="icons__like icons__like_like-dark" src="./images/Union.svg" alt="icono para darle me gusta a la foto">
+                <img class="icons__delete" src='<%=require("./images/Trash.svg")%>' alt="icono para eliminar imagen o modificar">
+                <img class="icons__like" src='<%=require("./images/Group.svg")%>' alt="icono para darle me gusta a la foto">
+                <img class="icons__like icons__like_like-dark" src='<%=require("./images/Union.svg")%>' alt="icono para darle me gusta a la foto">
               </div>
             <p class="card__image-text">Valle de Yosemite</p>
           </div>
@@ -50,8 +50,8 @@
             <span class="form__input-error name-input-error"></span>
             <input type="text" id="about-input" name="job" class="popup__container-texts-input-info form__input" placeholder="Acerca de mi" minlength="2" maxlength="200" required>
             <span class="form__input-error about-input-error"></span>
-            <button type="submit" class="popup__container-btn-closed">
-              <img src="./images/close_button.svg" alt="boton de cerrar">
+            <button type="button" class="popup__container-btn-closed">
+              <img src='<%=require("./images/close_button.svg")%>' alt="boton de cerrar">
             </button>
           </fieldset>
           <fieldset class="popup__handlers">
@@ -68,8 +68,8 @@
             <span class="form__input-error title-input-error"></span>
             <input type="url" id="url-input" name="link" class="popup__container-texts-input-link form__input" placeholder="Enlace a la imagen" required>
             <span class="form__input-error url-input-error"></span>
-            <button type="submit" class="popup__container-btn-closed popup__container-btn-closed-image">
-              <img src="./images/close_button.svg" alt="boton de cerrar">
+            <button type="button" class="popup__container-btn-closed popup__container-btn-closed-image">
+              <img src='<%=require("./images/close_button.svg")%>' alt="boton de cerrar">
             </button>
           </fieldset>
           <fieldset class="popup__handlers">
@@ -81,7 +81,7 @@
       <div class="popup popup_preview_images">
         <div class="popup__container">
           <button class="popup__container-btn-closed popup__container-btn-closed_images">
-            <img src="./images/close_button.svg" alt="boton de cerrar">
+            <img src='<%=require("./images/close_button.svg")%>' alt="boton de cerrar">
           </button>
           <div class="popup__container-img">
             <img id="img-card-popup" src=" " alt=" ">
@@ -96,6 +96,6 @@
       </p>
     </footer>
   </div>
-  <script type="module" src="./scripts/index.js"></script>
+  <script type="module" src="./src/index.js"></script>
 </body>
 </html>
