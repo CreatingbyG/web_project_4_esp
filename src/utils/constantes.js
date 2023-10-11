@@ -42,9 +42,15 @@ export const objConfig = {
 
 export const titulo = document.querySelector(".profile__description-name");
 export const subtitle = document.querySelector(".profile__description-info");
-export const nameInput = document.querySelector(".popup__container-texts-input-name");
-export const jobInput = document.querySelector(".popup__container-texts-input-info");
+export const nameInput = document.querySelector(
+  ".popup__container-texts-input-name"
+);
+export const jobInput = document.querySelector(
+  ".popup__container-texts-input-info"
+);
 export const titleValue = document.querySelector(
   ".popup__container-texts-input-title"
 );
-export const imageValue = document.querySelector(".popup__container-texts-input-link");
+export const imageValue = document.querySelector(
+  ".popup__container-texts-input-link"
+);

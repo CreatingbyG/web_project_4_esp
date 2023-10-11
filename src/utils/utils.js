@@ -8,13 +8,13 @@ export const escPopUpDeleting = (evt) => {
     deletingEvents();
   }
 };
-  
+
 export const deletingPopUpClick = (evt) => {
   if (evt.target.classList.contains("popup_opened")) {
     closeAllPopups();
     deletingEvents();
   }
-}
+};
 
 export function closePopUpProfile(evt) {
   evt.preventDefault();
@@ -29,12 +29,12 @@ export function closePopUpFormImages(evt) {
 }
 
 export function closeAllPopups() {
-  popUps.forEach(popup => {
-      popup.classList.remove("popup_opened");
+  popUps.forEach((popup) => {
+    popup.classList.remove("popup_opened");
   });
 }
 
-export function deletingEvents(evt){
-document.removeEventListener("keydown", escPopUpDeleting);
-document.removeEventListener("click", deletingPopUpClick); 
+export function deletingEvents(evt) {
+  document.removeEventListener("keydown", escPopUpDeleting);
+  document.removeEventListener("click", deletingPopUpClick);
 }

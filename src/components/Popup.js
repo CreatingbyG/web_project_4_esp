@@ -1,12 +1,13 @@
 import { closeAllPopups, deletingEvents } from "../utils/utils.js";
 
-
 export default class Popup {
   constructor(popupSelector) {
     this._popupSelector = popupSelector;
-    this._popup = document.querySelector(this._popupSelector); // Agrega esta línea para asignar el elemento
+    this._popup = document.querySelector(this._popupSelector);
     this._form = this._popup.firstElementChild;
-    this._closeButton = this._popup.querySelector(".popup__container-btn-closed");
+    this._closeButton = this._popup.querySelector(
+      ".popup__container-btn-closed"
+    );
     this._handleEscClose = this._handleEscClose.bind(this);
     this._handleOverlayClose = this._handleOverlayClose.bind(this);
     this._formSubmitHandler = this._formSubmitHandler.bind(this);
@@ -17,7 +18,6 @@ export default class Popup {
     document.addEventListener("keydown", this._handleEscClose);
     this._popup.addEventListener("click", this._handleOverlayClose);
     this.setEventListeners();
-    
   }
 
   close() {
