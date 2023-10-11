@@ -1,4 +1,4 @@
-import { closeAllPopups, deletingEvents } from "./utils.js";
+import { closeAllPopups, deletingEvents } from "../utils/utils.js";
 
 
 export default class Popup {
@@ -16,7 +16,6 @@ export default class Popup {
     this._popup.classList.add("popup_opened");
     document.addEventListener("keydown", this._handleEscClose);
     this._popup.addEventListener("click", this._handleOverlayClose);
-    //this._closeButton.addEventListener("click", this.close.bind(this));
     this.setEventListeners();
     
   }
