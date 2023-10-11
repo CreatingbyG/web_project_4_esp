@@ -10,6 +10,6 @@ module.exports = {
     // conecta el autoprefixer
     autoprefixer,
     // pasa un objeto con opciones después de conectar cssnano:
-    cssnano({ preset: "default" }) // establece los ajustes de minificación por defecto
-  ]
+    cssnano({ preset: "default" }), // establece los ajustes de minificación por defecto
+  ],
 };

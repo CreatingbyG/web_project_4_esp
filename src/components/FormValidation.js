@@ -1,13 +1,16 @@
-import { deletingEvents } from "../utils/utils.js"
+import { deletingEvents } from "../utils/utils.js";
 import { closeAllPopups } from "../utils/utils.js";
 import { popUpProfile } from "../utils/utils.js";
 import { popUpFormImages } from "../utils/utils.js";
-import {titulo, subtitle, nameInput, jobInput, titleValue, imageValue} from "../utils/constantes.js";
+import {
+  titulo,
+  subtitle,
+  nameInput,
+  jobInput,
+  titleValue,
+  imageValue,
+} from "../utils/constantes.js";
 import { Card } from "./Card.js";
-
-
-
-
 
 export const objConfig = {
   formSelector: ".form",
@@ -78,7 +81,6 @@ export class FormValidator {
         this._toggleButtonState(inputList, buttonElement);
       });
     });
-
   }
 
   enableValidation() {
@@ -97,39 +99,45 @@ export class FormValidator {
 
   _enterKeydownEventProfile(evt) {
     const formProfile = document.querySelector(".popup__container-texts");
-       if (evt.key === "Enter") {
-         evt.preventDefault();
-         const hasInvalidInput = this._hasInvalidInput(Array.from(formProfile.querySelectorAll(".form__input")));
-         if (!hasInvalidInput) {
-           titulo.textContent = nameInput.value;
-           subtitle.textContent = jobInput.value;
-           popUpProfile.classList.remove("popup_opened");
-         }
-         this._toggleInputError(nameInput, hasInvalidInput); // Show/hide error on nameInput
-         this._toggleInputError(jobInput, hasInvalidInput);  // Show/hide error on jobInput
-         deletingEvents();
-       }
-     }
-  
-     _enterKeyDownEventImages(evt) {
-      const formProfileImages = document.querySelector(".popup__container-texts-images");
-      if (evt.key === "Enter") {
-        evt.preventDefault();
-        const hasInvalidInput = this._hasInvalidInput(Array.from(formProfileImages.querySelectorAll(".form__input")));
-        if (!hasInvalidInput) {
-          const newCardData = {
-            name: titleValue.value,
-            link: imageValue.value,
-          };
-          const newCard = new Card(newCardData, "#template-cards");
-          document.querySelector(".contelements").prepend(newCard.createCard());
-          popUpFormImages.classList.remove("popup_opened");
-        }
-        this._toggleInputError(titleValue, hasInvalidInput); // Show/hide error on titleValue
-        this._toggleInputError(imageValue, hasInvalidInput); // Show/hide error on imageValue
-        deletingEvents();
+    if (evt.key === "Enter") {
+      evt.preventDefault();
+      const hasInvalidInput = this._hasInvalidInput(
+        Array.from(formProfile.querySelectorAll(".form__input"))
+      );
+      if (!hasInvalidInput) {
+        titulo.textContent = nameInput.value;
+        subtitle.textContent = jobInput.value;
+        popUpProfile.classList.remove("popup_opened");
       }
+      this._toggleInputError(nameInput, hasInvalidInput); // Show/hide error on nameInput
+      this._toggleInputError(jobInput, hasInvalidInput); // Show/hide error on jobInput
+      deletingEvents();
     }
+  }
+
+  _enterKeyDownEventImages(evt) {
+    const formProfileImages = document.querySelector(
+      ".popup__container-texts-images"
+    );
+    if (evt.key === "Enter") {
+      evt.preventDefault();
+      const hasInvalidInput = this._hasInvalidInput(
+        Array.from(formProfileImages.querySelectorAll(".form__input"))
+      );
+      if (!hasInvalidInput) {
+        const newCardData = {
+          name: titleValue.value,
+          link: imageValue.value,
+        };
+        const newCard = new Card(newCardData, "#template-cards");
+        document.querySelector(".contelements").prepend(newCard.createCard());
+        popUpFormImages.classList.remove("popup_opened");
+      }
+      this._toggleInputError(titleValue, hasInvalidInput); // Show/hide error on titleValue
+      this._toggleInputError(imageValue, hasInvalidInput); // Show/hide error on imageValue
+      deletingEvents();
+    }
+  }
 
   _handlePopupKeyDown(evt) {
     if (evt.key === "Escape") {

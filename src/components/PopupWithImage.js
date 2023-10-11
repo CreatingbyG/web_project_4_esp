@@ -10,11 +10,11 @@ export default class PopupWithImage extends Popup {
   _handleImageClick(evt) {
     const routeImage = evt.target.src;
     const altImage = evt.target.alt;
-    const nameImage = this._imageText
+    const nameImage = this._imageText;
     nameImage.textContent = evt.target.alt;
     const popUpFormImages = document.querySelector(".popup_preview_images");
     popUpFormImages.classList.add("popup_opened");
-    const imagePopUp = this._image
+    const imagePopUp = this._image;
     imagePopUp.setAttribute("src", routeImage);
     imagePopUp.setAttribute("alt", altImage);
     document.addEventListener("keydown", this._handlePopupKeyDown.bind(this));
