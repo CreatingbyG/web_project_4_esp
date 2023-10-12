@@ -16,30 +16,36 @@ export class Card {
     elementImage.alt = this.cardData.name;
 
     const likeIcon = element.querySelector(".icons__like");
-    likeIcon.addEventListener("click", this._handleLikeClick.bind(this));
+    likeIcon.addEventListener("click", this._handleToggleClick.bind(this, "show", "hide"));
 
     const darkMode = element.querySelector(".icons__like_like-dark");
-    darkMode.addEventListener("click", this._handleDarkModeClick.bind(this));
+    darkMode.addEventListener("click", this._handleToggleClick.bind(this, "hide", "show"));
 
-    const elements = element.querySelector(".icons__delete");
-    elements.addEventListener("click", this.deletingCards.bind(this));
+    const trashElements = element.querySelector(".icons__delete");
+    trashElements.addEventListener("click", this.deletingCards.bind(this));
 
     return element;
   }
 
-  _handleLikeClick(evt) {
-    this.cardData.liked = true;
+  // _handleLikeClick(evt) {
+  //   const element = evt.target;
+  //   const elementDark = element.nextElementSibling;
+  //   elementDark.classList.add("show");
+  //   elementDark.classList.remove("hide");
+  // }
+
+  // _handleShowAndHideClick(evt) {
+  //   const elementDark = evt.target;
+  //   const element = elementDark.previousElementSibling;
+  //   elementDark.classList.add("hide");
+  //   elementDark.classList.remove("show");
+  // }
+
+  _handleToggleClick(addClass, removeClass, evt) {
     const element = evt.target;
     const elementDark = element.nextElementSibling;
-    elementDark.classList.add("show");
-    elementDark.classList.remove("hide");
-  }
-
-  _handleDarkModeClick(evt) {
-    const elementDark = evt.target;
-    const element = elementDark.previousElementSibling;
-    elementDark.classList.add("hide");
-    elementDark.classList.remove("show");
+    elementDark.classList.add(addClass);
+    elementDark.classList.remove(removeClass);
   }
 
   deletingCards(evt) {
