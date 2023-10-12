@@ -1,7 +1,4 @@
-import { deletingEvents } from "../utils/utils.js";
-import { closeAllPopups } from "../utils/utils.js";
-import { popUpProfile } from "../utils/utils.js";
-import { popUpFormImages } from "../utils/utils.js";
+import { deletingEvents, closeAllPopups, popUpProfile, popUpFormImages } from "../utils/utils.js";
 import {
   titulo,
   subtitle,
@@ -111,7 +108,6 @@ export class FormValidator {
       }
       this._toggleInputError(nameInput, hasInvalidInput); // Show/hide error on nameInput
       this._toggleInputError(jobInput, hasInvalidInput); // Show/hide error on jobInput
-      deletingEvents();
     }
   }
 
