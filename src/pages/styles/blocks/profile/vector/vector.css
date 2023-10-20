@@ -1,0 +1,16 @@
+.vector{
+  position: relative;
+  right: 70px;
+   display: none;
+}
+
+.avatar:hover, .vector::after{
+  display: block;
+}
+
+@media screen and (max-width: 640px){
+  .vector{
+    right: 105px;
+    top: 45px;
+  }
+}

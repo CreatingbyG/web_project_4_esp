@@ -21,25 +21,11 @@ export class Card {
     const darkMode = element.querySelector(".icons__like_like-dark");
     darkMode.addEventListener("click", this._handleToggleClick.bind(this, "hide", "show"));
 
-    const trashElements = element.querySelector(".icons__delete");
-    trashElements.addEventListener("click", this.deletingCards.bind(this));
+    const formElements = element.querySelector(".icons__delete");
+    formElements.addEventListener("click", this._showingFormDelete.bind(this));
 
     return element;
   }
-
-  // _handleLikeClick(evt) {
-  //   const element = evt.target;
-  //   const elementDark = element.nextElementSibling;
-  //   elementDark.classList.add("show");
-  //   elementDark.classList.remove("hide");
-  // }
-
-  // _handleShowAndHideClick(evt) {
-  //   const elementDark = evt.target;
-  //   const element = elementDark.previousElementSibling;
-  //   elementDark.classList.add("hide");
-  //   elementDark.classList.remove("show");
-  // }
 
   _handleToggleClick(addClass, removeClass, evt) {
     const element = evt.target;
@@ -48,12 +34,10 @@ export class Card {
     elementDark.classList.remove(removeClass);
   }
 
-  deletingCards(evt) {
-    if (evt.target.classList.contains("icons__delete")) {
-      const cardElement = evt.target.closest(".elements");
-      cardElement.remove();
+  _showingFormDelete() {
+    const popupDeleting = document.querySelector(".popup_deleting_cards")
+    popupDeleting.classList.add("popup_opened")
     }
-  }
 
   createCard() {
     return this._createCardElement();
