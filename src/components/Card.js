@@ -1,3 +1,4 @@
+import PopupWithForm from "./PopupWithForm";
 export class Card {
   constructor(cardData, templateSelector) {
     this.cardData = cardData;
@@ -21,8 +22,21 @@ export class Card {
     const darkMode = element.querySelector(".icons__like_like-dark");
     darkMode.addEventListener("click", this._handleToggleClick.bind(this, "hide", "show"));
 
-    const formElements = element.querySelector(".icons__delete");
-    formElements.addEventListener("click", this._showingFormDelete.bind(this));
+    const popupDeleting = new PopupWithForm(".popup_deleting_cards", () => {
+      const deleteButton = document.querySelector(".popup__handlers-button-deleting");
+      deleteButton.addEventListener("click", (evt) => {
+        const cardElement = evt.target.closest(".card");
+        if (cardElement) {
+          cardElement.remove();
+        }
+      });
+    });
+    const formSure = document.querySelectorAll(".icons__delete");
+    formSure.forEach((element) => {
+      element.addEventListener("click", () => {
+        popupDeleting.open();
+      });
+    });
 
     return element;
   }
@@ -34,10 +48,12 @@ export class Card {
     elementDark.classList.remove(removeClass);
   }
 
-  _showingFormDelete() {
-    const popupDeleting = document.querySelector(".popup_deleting_cards")
-    popupDeleting.classList.add("popup_opened")
-    }
+  // deletingCards(evt) {
+  //   if (evt.target.classList.contains("icons__delete")) {
+  //     const cardElement = evt.target.closest(".elements");
+  //     cardElement.remove();
+  //   }
+  // }
 
   createCard() {
     return this._createCardElement();

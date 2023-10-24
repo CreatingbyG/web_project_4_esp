@@ -27,13 +27,15 @@
             src='<%=require(".././src/images/profile-explorer.jpg")%>'
             alt="imagen del rostro del determinado perfil"
           />
+          <div class="profile__vector">
           <img
           class="vector"
           src='<%=require(".././src/images/Vector (3).svg")%>'
           alt="imagen del rostro del determinado perfil"
         />
+        </div>
           <div class="profile__description">
-            <h2 class="profile__description-name">Gabriel Sanchez</h2>
+            <h2 class="profile__description-name"></h2>
             <h3 class="profile__description-info">Desarrollador Web</h3>
           </div>
           <button class="edit-button"></button>
@@ -180,7 +182,7 @@
           </div>
         </div>
         <div class="popup popup_deleting_cards">
-          <div class="popup__container popup__container_deleting form" novalidate>
+          <form class="popup__container popup__container_deleting form" novalidate>
             <fieldset class="popup__container-texts popup__container-texts-deleting">
               <h3 class="popup__container-title">¿Estás seguro/a?</h3>
               <button
@@ -196,16 +198,16 @@
             <fieldset class="popup__handlers">
               <button
                 type="submit"
-                class="popup__handlers-button popup__handlers-button-create form__submit"
+                class="popup__handlers-button popup__handlers-button-deleting form__submit"
                 disabled
               >
                 Si
               </button>
             </fieldset>
-          </div>
+          </form>
         </div>
         <div class="popup popup_change_profile">
-          <div class="popup__container popup__container_edit form" novalidate>
+          <form class="popup__container popup__container_edit form" novalidate>
             <fieldset class="popup__container-texts popup__container-texts-edit">
               <h3 class="popup__container-title">Cambiar foto de perfil</h3>
               <button
@@ -219,7 +221,7 @@
               </button>
               <input
               type="url"
-              id="url-input-edit"
+              id="avatar-input"
               name="link"
               class="popup__container-texts-input-link popup__container-texts-input-link-edit form__input"
               placeholder="Enlace a la url"
@@ -230,13 +232,13 @@
             <fieldset class="popup__handlers">
                 <button
                 type="submit"
-                class="popup__handlers-button popup__handlers-button-delete form__submit"
+                class="popup__handlers-button popup__handlers-button-change form__submit"
                 disabled
               >
                 Guardar
               </button>
             </fieldset>
-          </div>
+          </form>
         </div>
       </main>
       <footer class="footer">

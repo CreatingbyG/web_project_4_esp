@@ -42,17 +42,27 @@ import "../pages/styles/blocks/imgcontainer/img-card-popup/img-card-popup.css";
 import "../pages/styles/blocks/footer/footer.css";
 import "../pages/styles/blocks/global/global.css";
 
-//import { initialCards } from "../utils/constantes.js"
 import { Card } from "../components/Card.js";
 import PopupWithImage from "../components/PopupWithImage.js";
 import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
-//import { data } from "autoprefixer"
 
 const sectionContainer = ".contelements";
 const api = new Api();
+
+const userInfo = new UserInfo({
+  nameSelector: ".profile__description-name",
+  infoSelector: ".profile__description-info",
+  avatarSelector: ".avatar"
+});
+
+api.getUserInfoChanged()
+.then(user => {
+  userInfo.setUserInfo(user);
+})
+
 api.getInitialCards().then((data) => {
   const cardSection = new Section(
     {
@@ -82,13 +92,17 @@ document.addEventListener("click", (evt) => {
 
 const editButton = document.querySelector(".edit-button");
 api.getUserInfo(userInfo);
-const userInfo = new UserInfo({
-  nameSelector: ".profile__description-name",
-  infoSelector: ".profile__description-info",
-});
 const popupProfile = new PopupWithForm(".popup_profile", (data) => {
   userInfo.setUserInfo(data);
+  api.getUserInfoChanged(data)
+    .then(() => {
+      userInfo.setUserInfo();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 });
+
 
 editButton.addEventListener("click", () => {
   const { _nameInput, _jobInput } = userInfo;
@@ -111,17 +125,19 @@ addButton.addEventListener("click", () => {
   popupImages.open();
 });
 
-// const popupDeleting = new PopupWithForm(".popup_deleting_cards", () => {
-//   const deleteButton = document.querySelector(".icons__delete");
-//   deleteButton.addEventListener("submit", (evt) => {
-//     if (evt.target.classList.contains("popup__handlers-button-delete")) {
-//       const cardElement = evt.target.closest(".elements");
-//       cardElement.remove();
-//     }
-//   });
-// });
+const editProfileForm = document.querySelector('.vector');
+const popupProfileChange = new PopupWithForm('.popup_change_profile', (avatarLink) => {
+  api.updateAvatar(avatarLink)
+    .then((response) => {
+      const avatar = document.querySelector(".avatar");
+      avatar.src = response.avatar; // Actualizar la imagen del avatar con la URL devuelta por el servidor
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+});
 
-// const deleteButton = document.querySelector(".icons__delete");
-// deleteButton.addEventListener("click", () =>{
-//   popupDeleting.open();
-// })
+editProfileForm.addEventListener('click', (event) => {
+  event.preventDefault(); // Evitar que el formulario se envíe automáticamente // Obtener la URL de la imagen del avatar del campo de entrada
+  popupProfileChange.open(); // Pasar la URL de la imagen del avatar al método open del popupProfileChange
+});
