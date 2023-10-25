@@ -1,8 +1,12 @@
-import PopupWithForm from "./PopupWithForm";
+import PopupWithForm from "./PopupWithForm.js";
 export class Card {
-  constructor(cardData, templateSelector) {
-    this.cardData = cardData;
+  constructor({name, link, like, user_id, owner:{_id}}, templateSelector, user) {
     this.templateSelector = templateSelector;
+    this.name = name;
+    this.link = link;
+    this.like = like;
+    this.user = user._id;
+    this.owner = _id;
   }
 
   _createCardElement() {
@@ -10,36 +14,38 @@ export class Card {
     const element = template.querySelector(".elements").cloneNode(true);
 
     const elementTitle = element.querySelector(".card__image-text");
-    elementTitle.textContent = this.cardData.name;
+    elementTitle.textContent = this.name;
 
     const elementImage = element.querySelector(".card-photo");
-    elementImage.src = this.cardData.link;
-    elementImage.alt = this.cardData.name;
+    elementImage.src = this.link;
+    elementImage.alt = this.name;
 
     const likeIcon = element.querySelector(".icons__like");
     likeIcon.addEventListener("click", this._handleToggleClick.bind(this, "show", "hide"));
 
     const darkMode = element.querySelector(".icons__like_like-dark");
     darkMode.addEventListener("click", this._handleToggleClick.bind(this, "hide", "show"));
-
+    
     const popupDeleting = new PopupWithForm(".popup_deleting_cards", () => {
       const deleteButton = document.querySelector(".popup__handlers-button-deleting");
-      deleteButton.addEventListener("click", (evt) => {
-        const cardElement = evt.target.closest(".card");
-        if (cardElement) {
-          cardElement.remove();
-        }
+      deleteButton.addEventListener("click", () => {
+          this.cardToDelete.remove();
       });
     });
-    const formSure = document.querySelectorAll(".icons__delete");
-    formSure.forEach((element) => {
-      element.addEventListener("click", () => {
-        popupDeleting.open();
-      });
-    });
+
+    const deleteBtnIcon = element.querySelector(".icons__delete");
+    if (this.user !== this.owner){
+      deleteBtnIcon.style.display = "none" 
+    }
+    
+    deleteBtnIcon.addEventListener("click", (evt) => {   
+    this.cardToDelete = evt.target.closest(".elements");  
+      popupDeleting.open();
+  });
 
     return element;
   }
+
 
   _handleToggleClick(addClass, removeClass, evt) {
     const element = evt.target;

@@ -58,25 +58,40 @@ const userInfo = new UserInfo({
   avatarSelector: ".avatar"
 });
 
-api.getUserInfoChanged()
-.then(user => {
-  userInfo.setUserInfo(user);
-})
+Promise.all([api.getUserInfoChanged(), api.getInitialCards()])
+  .then(([user, data]) => {
+    console.log(user._id)
+    userInfo.setUserInfo(user);
 
-api.getInitialCards().then((data) => {
-  const cardSection = new Section(
-    {
-      data: data,
-      renderer: (item) => {
-        const card = new Card(item, "#template-cards");
-        const cardElement = card.createCard();
-        cardSection.addItem(cardElement);
+    const cardSection = new Section(
+      {
+        data: data,
+        renderer: (item) => {
+          const card = new Card(item, "#template-cards", user);
+          const cardElement = card.createCard();
+          cardSection.addItem(cardElement);
+        },
       },
-    },
-    sectionContainer
-  );
-  cardSection.render();
-});
+      sectionContainer
+    );
+    cardSection.render();
+
+    const addButton = document.querySelector(".add-button");
+    const popupImages = new PopupWithForm(".popup_images", (cardData) => {
+      api.addNewCard(cardData)
+      console.log(cardData)
+        const { name, link } = cardData;
+        const newCard = new Card({ name, link, like: false }, "#template-cards", user);
+        document.querySelector(".contelements").prepend(newCard.createCard());
+      });
+
+    addButton.addEventListener("click", () => {
+      popupImages.open();
+    });
+  })
+  .catch((error) => {
+    console.log(error);
+  });
 
 document.addEventListener("click", (evt) => {
   if (evt.target.classList.contains("card-photo")) {
@@ -113,18 +128,6 @@ editButton.addEventListener("click", () => {
   popupProfile.open();
 });
 
-const addButton = document.querySelector(".add-button");
-const popupImages = new PopupWithForm(".popup_images", (cardData) => {
-  api.addNewCard(cardData)
-    const { name, link } = cardData;
-    const newCard = new Card({ name, link, like: false }, "#template-cards");
-    document.querySelector(".contelements").prepend(newCard.createCard());
-  });
-
-addButton.addEventListener("click", () => {
-  popupImages.open();
-});
-
 const editProfileForm = document.querySelector('.vector');
 const popupProfileChange = new PopupWithForm('.popup_change_profile', (avatarLink) => {
   api.updateAvatar(avatarLink)
@@ -141,3 +144,4 @@ editProfileForm.addEventListener('click', (event) => {
   event.preventDefault(); // Evitar que el formulario se envíe automáticamente // Obtener la URL de la imagen del avatar del campo de entrada
   popupProfileChange.open(); // Pasar la URL de la imagen del avatar al método open del popupProfileChange
 });
+
