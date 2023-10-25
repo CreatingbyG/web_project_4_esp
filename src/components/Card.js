@@ -1,4 +1,6 @@
 import PopupWithForm from "./PopupWithForm.js";
+import { popupDeleting } from "../pages/index.js";
+
 export class Card {
   constructor({name, link, like, user_id, owner:{_id}}, templateSelector, user) {
     this.templateSelector = templateSelector;
@@ -25,23 +27,16 @@ export class Card {
 
     const darkMode = element.querySelector(".icons__like_like-dark");
     darkMode.addEventListener("click", this._handleToggleClick.bind(this, "hide", "show"));
-    
-    const popupDeleting = new PopupWithForm(".popup_deleting_cards", () => {
-      const deleteButton = document.querySelector(".popup__handlers-button-deleting");
-      deleteButton.addEventListener("click", () => {
-          this.cardToDelete.remove();
-      });
-    });
 
     const deleteBtnIcon = element.querySelector(".icons__delete");
     if (this.user !== this.owner){
       deleteBtnIcon.style.display = "none" 
     }
-    
+
     deleteBtnIcon.addEventListener("click", (evt) => {   
-    this.cardToDelete = evt.target.closest(".elements");  
-      popupDeleting.open();
-  });
+      this.cardToDelete = evt.target.closest(".elements");  
+      popupDeleting.open(this.cardToDelete);
+    });
 
     return element;
   }

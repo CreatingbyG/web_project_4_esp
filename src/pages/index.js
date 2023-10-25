@@ -145,3 +145,7 @@ editProfileForm.addEventListener('click', (event) => {
   popupProfileChange.open(); // Pasar la URL de la imagen del avatar al método open del popupProfileChange
 });
 
+export const popupDeleting = new PopupWithForm(".popup_deleting_cards", (cardToDelete) => {
+  //console.log(cardToDelete)
+  cardToDelete.remove();
+})
