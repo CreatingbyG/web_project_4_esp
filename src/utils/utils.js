@@ -38,3 +38,13 @@ export function deletingEvents(evt) {
   document.removeEventListener("keydown", escPopUpDeleting);
   document.removeEventListener("click", deletingPopUpClick);
 }
+
+// export function deletingCards(){
+//   const deleteButton = document.querySelector(".popup__handlers-button-delete");
+//   deleteButton.addEventListener("submit", (evt) => {
+//           if (evt.target.classList.contains("popup__handlers-button-delete")) {
+//          const cardElement = evt.target.closest(".elements");
+//          cardElement.remove();
+//           }
+//   })
+// }

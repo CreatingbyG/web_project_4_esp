@@ -1,7 +1,8 @@
 export default class UserInfo {
-  constructor({ nameSelector, infoSelector }) {
+  constructor({ nameSelector, infoSelector, avatarSelector }) {
     this._nameElement = document.querySelector(nameSelector);
     this._infoElement = document.querySelector(infoSelector);
+    this._avatarElement = document.querySelector(avatarSelector)
     this._nameInput = document.querySelector(
       ".popup__container-texts-input-name"
     );
@@ -14,12 +15,14 @@ export default class UserInfo {
     const userData = {
       name: this._nameElement.textContent,
       job: this._infoElement.textContent,
+      avatar: this._avatarElement.src
     };
     return userData;
   }
 
-  setUserInfo({ name, job }) {
+  setUserInfo({ name, about, avatar }) {
     this._nameElement.textContent = name;
-    this._infoElement.textContent = job;
+    this._infoElement.textContent = about;
+    this._avatarElement.src = avatar
   }
 }

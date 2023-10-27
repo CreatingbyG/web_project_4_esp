@@ -19,7 +19,11 @@ export default class PopupWithForm extends Popup {
   }
 
   _getNewValues() {
+    if (this._form.id == "confirm"){
+      this._submitCallBack(this.cardToDelete)
+    } else {
     this._submitCallBack(this._getInputValues());
+    }
   }
 
   _formSubmitHandler = (evt) => {
@@ -33,13 +37,16 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener("submit", this._formSubmitHandler);
   }
 
-  open() {
+  open(cardToDelete) {
+    console.log(cardToDelete)
     super.open();
     this._formValidator.enableValidation();
+    this.cardToDelete = cardToDelete
   }
 
-  close() {
+  close(cardToDelete) {
     super.close();
     this._form.reset();
+    cardToDelete ? this._form.id="delete" : null ;
   }
 }
