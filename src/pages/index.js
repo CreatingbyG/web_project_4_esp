@@ -146,6 +146,6 @@ editProfileForm.addEventListener('click', (event) => {
 });
 
 export const popupDeleting = new PopupWithForm(".popup_deleting_cards", (cardToDelete) => {
-  //console.log(cardToDelete)
   cardToDelete.remove();
+  api.deleteCard();
 })

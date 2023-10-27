@@ -119,4 +119,21 @@ getInfoAvatar(){
   console.error(`Error in updateAvatar: ${error}`);
 });
 }
+
+deleteCard(card_id){
+return fetch(`${this._url}cards/card_id`, {
+  method: 'DELETE',
+  headers: {
+    authorization: this._token,
+  }
+})
+.then((response) => {
+  if (response.ok) {
+    return response.json();
+  }
+})
+.catch((error) => {
+console.error(`Error in deleting card: ${error}`);
+});
+}
 }
