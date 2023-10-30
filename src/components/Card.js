@@ -40,8 +40,8 @@ export class Card {
       popupDeleting.open(this.cardToDelete, this.cardId)
     });
 
-     this.likeCountElement = element.querySelector(".icons__like_number");
-      this.likeCountElement.textContent = this._likes.length > 0 ? this._likes.length : '';
+    this.likeCountElement = element.querySelector(".icons__like_number");
+    this.likeCountElement.textContent = this._likes.length > 0 ? this._likes.length : '';
 
     if (this._likes.length === 0) {
       this.likeCountElement.style.display = 'none';
@@ -67,6 +67,7 @@ export class Card {
         this._likes = res.likes;
         if (this.likeCountElement) {
           this.likeCountElement.textContent = this._likes.length > 0 ? this._likes.length : '';
+          this.likeCountElement.style.display = "block";
         } 
         }       // this._getLikes;
       })

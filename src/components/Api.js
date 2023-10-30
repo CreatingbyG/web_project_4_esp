@@ -49,7 +49,7 @@ getUserInfo(){
 });
 }
 
-getUserInfoChanged(data){
+getUserInfoChangedPatch(data){
   return fetch (`${this._url}users/me`, {
     method: "PATCH",
     headers: {
