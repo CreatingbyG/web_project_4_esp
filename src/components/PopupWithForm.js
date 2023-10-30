@@ -20,7 +20,7 @@ export default class PopupWithForm extends Popup {
 
   _getNewValues() {
     if (this._form.id == "confirm"){
-      this._submitCallBack(this.cardToDelete)
+      this._submitCallBack(this.cardToDelete, this.cardId)
     } else {
     this._submitCallBack(this._getInputValues());
     }
@@ -37,11 +37,11 @@ export default class PopupWithForm extends Popup {
     this._form.addEventListener("submit", this._formSubmitHandler);
   }
 
-  open(cardToDelete) {
-    console.log(cardToDelete)
+  open(cardToDelete, _id) {
     super.open();
     this._formValidator.enableValidation();
     this.cardToDelete = cardToDelete
+    this.cardId = _id;
   }
 
   close(cardToDelete) {

@@ -3,7 +3,7 @@ export default class Api{
   constructor(){
     this._token = "64bdc8e1-28e5-4d06-acdb-847b17c56560";
     this._groupId = "web_es_09";
-    this._url = `https://around.nomoreparties.co/${this._groupId}/`;
+    this._url = `https://around.nomoreparties.co/v1/${this._groupId}/`;
   }
 
 getInitialCards(){
@@ -49,7 +49,7 @@ getUserInfo(){
 });
 }
 
-getUserInfoChanged(data){
+getUserInfoChangedPatch(data){
   return fetch (`${this._url}users/me`, {
     method: "PATCH",
     headers: {
@@ -120,20 +120,60 @@ getInfoAvatar(){
 });
 }
 
-deleteCard(card_id){
-return fetch(`${this._url}cards/card_id`, {
-  method: 'DELETE',
-  headers: {
-    authorization: this._token,
-  }
-})
-.then((response) => {
-  if (response.ok) {
+deleteCard(_id){
+  return fetch(`${this._url}cards/${_id}`, {
+    method: 'DELETE',
+    headers: {
+      authorization: this._token,
+    }
+  })
+  .then((response) => {
+    if (!response.ok) {
+      throw new Error(`Error deleting card: ${response.statusText}`);
+    }
     return response.json();
-  }
-})
-.catch((error) => {
-console.error(`Error in deleting card: ${error}`);
-});
+  })
+  .catch((error) => {
+    console.error(`Error in deleteCard: ${error}`);
+  });
+}
+
+addLike(_id) {
+  return fetch(`${this._url}cards/likes/${_id}`, {
+    method: 'PUT',
+    headers: {
+      authorization: this._token,
+      'Content-Type': 'application/json',
+    },
+    })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      throw new Error(`Error adding like: ${res.statusText}`);
+    }
+  })
+  .catch((error) => {
+    console.error(`Error in addLike: ${error}`);
+  });
+}
+
+removeLike(_id) {
+  return fetch(`${this._url}cards/likes/${_id}`, {
+    method: 'DELETE',
+    headers: {
+      authorization: this._token,
+    }
+  })
+  .then(res => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      throw new Error(`Error removing like: ${res.statusText}`);
+    }
+  })
+  .catch((error) => {
+    console.error(`Error in removeLike: ${error}`);
+  });
 }
 }

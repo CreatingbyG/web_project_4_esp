@@ -20,6 +20,7 @@ import "../pages/styles/blocks/elements/card/card-photo/card-photo.css";
 import "../pages/styles/blocks/elements/icons/icons.css";
 import "../pages/styles/blocks/elements/icons/icons__delete/icons__delete.css";
 import "../pages/styles/blocks/elements/icons/icons__like/icons__like.css";
+import "../pages/styles/blocks/elements/icons/icons__like_number/icons__like_number.css";
 import "../pages/styles/blocks/popup/popup.css";
 import "../pages/styles/blocks/popup/popupform/popupform.css";
 import "../pages/styles/blocks/popup/popup_opened/popup_opened.css";
@@ -48,9 +49,10 @@ import Section from "../components/Section.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 import Api from "../components/Api.js";
+import { buttonEditChange, buttonDeletingCards, buttonProfileEdit, buttonCreatingCard } from "../utils/constantes.js";
 
 const sectionContainer = ".contelements";
-const api = new Api();
+export const api = new Api();
 
 const userInfo = new UserInfo({
   nameSelector: ".profile__description-name",
@@ -60,7 +62,6 @@ const userInfo = new UserInfo({
 
 Promise.all([api.getUserInfoChanged(), api.getInitialCards()])
   .then(([user, data]) => {
-    console.log(user._id)
     userInfo.setUserInfo(user);
 
     const cardSection = new Section(
@@ -69,6 +70,7 @@ Promise.all([api.getUserInfoChanged(), api.getInitialCards()])
         renderer: (item) => {
           const card = new Card(item, "#template-cards", user);
           const cardElement = card.createCard();
+          //item._likes = {}
           cardSection.addItem(cardElement);
         },
       },
@@ -78,11 +80,14 @@ Promise.all([api.getUserInfoChanged(), api.getInitialCards()])
 
     const addButton = document.querySelector(".add-button");
     const popupImages = new PopupWithForm(".popup_images", (cardData) => {
+      buttonCreatingCard.textContent = "Creando..."
       api.addNewCard(cardData)
-      console.log(cardData)
-        const { name, link } = cardData;
-        const newCard = new Card({ name, link, like: false }, "#template-cards", user);
+      .then((response) => {
+        const { name, link, _id, owner } = response;
+        const newCard = new Card({ name, link, _id, likes: [], owner}, "#template-cards", user);
         document.querySelector(".contelements").prepend(newCard.createCard());
+        buttonCreatingCard.textContent = "Crear"
+      })
       });
 
     addButton.addEventListener("click", () => {
@@ -90,7 +95,7 @@ Promise.all([api.getUserInfoChanged(), api.getInitialCards()])
     });
   })
   .catch((error) => {
-    console.log(error);
+    buttonCreatingCard.textContent = "Crear"
   });
 
 document.addEventListener("click", (evt) => {
@@ -109,12 +114,14 @@ const editButton = document.querySelector(".edit-button");
 api.getUserInfo(userInfo);
 const popupProfile = new PopupWithForm(".popup_profile", (data) => {
   userInfo.setUserInfo(data);
-  api.getUserInfoChanged(data)
+  buttonProfileEdit.textContent = "Guardando..."
+  api.getUserInfoChangedPatch(data)
     .then(() => {
-      userInfo.setUserInfo();
+      userInfo.setUserInfo(data);
+      buttonProfileEdit.textContent = "Guardar"
     })
     .catch((error) => {
-      console.log(error);
+      buttonProfileEdit.textContent = "Guardar"
     });
 });
 
@@ -130,22 +137,32 @@ editButton.addEventListener("click", () => {
 
 const editProfileForm = document.querySelector('.vector');
 const popupProfileChange = new PopupWithForm('.popup_change_profile', (avatarLink) => {
+  buttonEditChange.textContent = "Guardando..."
   api.updateAvatar(avatarLink)
     .then((response) => {
       const avatar = document.querySelector(".avatar");
-      avatar.src = response.avatar; // Actualizar la imagen del avatar con la URL devuelta por el servidor
+      avatar.src = response.avatar;
+      buttonEditChange.textContent = "Guardar"
     })
     .catch((error) => {
-      console.log(error);
+      buttonEditChange.textContent = "Guardar";
     });
 });
 
 editProfileForm.addEventListener('click', (event) => {
   event.preventDefault(); // Evitar que el formulario se envíe automáticamente // Obtener la URL de la imagen del avatar del campo de entrada
-  popupProfileChange.open(); // Pasar la URL de la imagen del avatar al método open del popupProfileChange
+  popupProfileChange.open();
 });
 
-export const popupDeleting = new PopupWithForm(".popup_deleting_cards", (cardToDelete) => {
-  cardToDelete.remove();
-  api.deleteCard();
+export const popupDeleting = new PopupWithForm(".popup_deleting_cards", (cardToDelete, _id) => {
+  buttonDeletingCards.textContent = "Eliminando..."
+  api.deleteCard(_id)
+    .then(() => {
+      cardToDelete.remove();
+      buttonDeletingCards.textContent = "Si";
+    })
+    .catch((error) => {
+      console.error(`Error in deleting card: ${error}`);
+      buttonDeletingCards.textContent = "Si";
+    });
 })

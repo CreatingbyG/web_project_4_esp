@@ -1,16 +1,20 @@
-import PopupWithForm from "./PopupWithForm.js";
 import { popupDeleting } from "../pages/index.js";
+import { api } from "../pages/index.js";
 
 export class Card {
-  constructor({name, link, like, user_id, owner:{_id}}, templateSelector, user) {
+  constructor({name, link, likes, owner = {}, _id}, templateSelector, user) {
     this.templateSelector = templateSelector;
     this.name = name;
     this.link = link;
-    this.like = like;
+    this._likes = likes || [];
     this.user = user._id;
-    this.owner = _id;
+    this.owner = owner._id || {};
+    this.cardId = _id || null;
+    this.ownerName = owner.name;
+    this.userName = user.name;
+    this.likeCountElement = null;
+    this._isLiked = this._likes.some((like) => like.name === this.userName);
   }
-
   _createCardElement() {
     const template = document.querySelector(this.templateSelector).content;
     const element = template.querySelector(".elements").cloneNode(true);
@@ -22,11 +26,9 @@ export class Card {
     elementImage.src = this.link;
     elementImage.alt = this.name;
 
-    const likeIcon = element.querySelector(".icons__like");
-    likeIcon.addEventListener("click", this._handleToggleClick.bind(this, "show", "hide"));
+    this.likeIcon = element.querySelector(".icons__dislike");
+    this._listeners();
 
-    const darkMode = element.querySelector(".icons__like_like-dark");
-    darkMode.addEventListener("click", this._handleToggleClick.bind(this, "hide", "show"));
 
     const deleteBtnIcon = element.querySelector(".icons__delete");
     if (this.user !== this.owner){
@@ -35,28 +37,77 @@ export class Card {
 
     deleteBtnIcon.addEventListener("click", (evt) => {   
       this.cardToDelete = evt.target.closest(".elements");  
-      popupDeleting.open(this.cardToDelete);
+      popupDeleting.open(this.cardToDelete, this.cardId)
     });
+
+    this.likeCountElement = element.querySelector(".icons__like_number");
+    this.likeCountElement.textContent = this._likes.length > 0 ? this._likes.length : '';
+
+    if (this._likes.length === 0) {
+      this.likeCountElement.style.display = 'none';
+    } else {
+      this.likeCountElement.style.display = 'block';
+    }
+    this.myLike()
+  
 
     return element;
   }
 
-
-  _handleToggleClick(addClass, removeClass, evt) {
-    const element = evt.target;
-    const elementDark = element.nextElementSibling;
-    elementDark.classList.add(addClass);
-    elementDark.classList.remove(removeClass);
+  _handleToggleClick() {
+    this._isLiked = !this._isLiked;
+    this.likeIcon.classList.toggle("icons__like");
+    this.handleLike(this.cardId)
   }
 
-  // deletingCards(evt) {
-  //   if (evt.target.classList.contains("icons__delete")) {
-  //     const cardElement = evt.target.closest(".elements");
-  //     cardElement.remove();
+  handleLike(_id){
+    if (this._isLiked){  
+      api.addLike(this.cardId).then((res) => {
+        if (res && res.likes){
+        this._likes = res.likes;
+        if (this.likeCountElement) {
+          this.likeCountElement.textContent = this._likes.length > 0 ? this._likes.length : '';
+          this.likeCountElement.style.display = "block";
+        } 
+        }       // this._getLikes;
+      })
+    } else {
+      api.removeLike(_id).then((res) => {
+        if (res && res.likes){
+        this._likes = res.likes
+        if (this.likeCountElement) {
+          this.likeCountElement.textContent = this._likes.length > 0 ? this._likes.length : '';
+        }
+      }       // this._getLikes;
+      });
+    }
+  }
+  // _getLikes() {
+  //   const likeCountElement = this._element.querySelector('.icons__likes_number');
+  //   if (this._likes.length > 0) {
+  //     likeCountElement.textContent = this._likes.length;
+  //     likeCountElement.style.display = 'block';
+  //   } else {
+  //     likeCountElement.textContent = '';
+  //     likeCountElement.style.display = 'none';
   //   }
   // }
+  
+  myLike(){
+      if (this._isLiked){
+         this.likeIcon.classList.add("icons__like");
+       }
+     }
+
 
   createCard() {
     return this._createCardElement();
+  }
+
+  _listeners(){
+    this.likeIcon.addEventListener("click", () => {
+      this._handleToggleClick();
+      //this.handleLike();
+    })
   }
 }
