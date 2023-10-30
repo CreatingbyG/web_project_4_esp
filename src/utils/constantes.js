@@ -54,3 +54,7 @@ export const titleValue = document.querySelector(
 export const imageValue = document.querySelector(
   ".popup__container-texts-input-link"
 );
+export const buttonEditChange = document.querySelector(".popup__handlers-button-change");
+export const buttonDeletingCards = document.querySelector(".popup__handlers-button-deleting");
+export const buttonCreatingCard = document.querySelector(".popup__handlers-button-create")
+export const buttonProfileEdit = document.querySelector(".popup__handlers-button")
