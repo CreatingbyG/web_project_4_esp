@@ -15,6 +15,7 @@ import "../pages/styles/blocks/profile/profile__description-name/profile__descri
 import "../pages/styles/blocks/profile/profile__description-info/profile__description-info.css";
 import "../pages/styles/blocks/elements/elements.css";
 import "../pages/styles/blocks/elements/card/card.css";
+import "../pages/styles/blocks/elements/card/card__image/card__image.css";
 import "../pages/styles/blocks/elements/card/card__image-text/card__image-text.css";
 import "../pages/styles/blocks/elements/card/card-photo/card-photo.css";
 import "../pages/styles/blocks/elements/icons/icons.css";
